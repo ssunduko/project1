@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+  <head>
+    <title>Book Search App</title>
+
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  </head>
+
+  <body>
+  <div class="container">
+        <div class="header">
+            <ul class="nav nav-pills">
+                <li><a href="/">Home</a></li>
+                <li><a href="/search">Search</a></li>
+                <li class="active"><a href="#">Book</a><li>
+                <li><a href="/logout">Log Out</a></li>
+            </ul>
+        </div>
+        <h3 class="text-muted">Book Search App</h3>
+        <div class="jumbotron">
+                {%if found == 0 %}
+                    <h2>Review A Book & Rate </h2>
+                    <form action="/book/{{book.isbn}}" method="post">
+
+                        <input type="radio" name="rating" id="radio-1" value="1" />
+                        <label for="radio-1"></label>
+                        <label for="radio-1">One Star</label>
+                        <br>
+
+                        <input type="radio" name="rating" id="radio-2" value="2"/>
+                        <label for="radio-2"></label>
+                        <label for="radio-2">Two Stars</label>
+                        <br>
+
+                        <input type="radio" name="rating" id="radio-3" value="3" />
+                        <label for="radio-3"></label>
+                        <label for="radio-3">Three Starts</label>
+                        <br>
+
+                        <input type="radio" name="rating" id="radio-4" value="4"/>
+                        <label for="radio-4"></label>
+                        <label for="radio-4">Four Stars</label>
+                        <br>
+
+                        <input type="radio" name="rating" id="radio-5" value="5" />
+                        <label for="radio-5"></label>
+                        <label for="radio-5">Five Starts</label>
+                  
+                        <label for="review" class="sr-only">Name</label>
+                        <textarea type="review" name="review" id="review" class="form-control" placeholder="Enter Review" required autofocus rows="8"></textarea><br>
+                        <button id="btnReview" class="btn btn-lg btn-primary btn-block" type="submit">Submit Review and Rating</button>
+                    </form>
+                {% endif %}
+        </div>
+        <div class="card card-cascade wider">
+                <div class="col-xs-6 col-md-4">
+                    <div class="card-body text-center">
+                        <h4 class="card-title">Book Information </h4>
+                        <p class="card-text">ISBN: {{ book.isbn }} </p>
+                        <p class="card-text">Title: {{ book.title }} </p>
+                        <p class="card-text">Author:
+                        {% for author in book.authors %}
+                            {{ author.name }}<br>
+                        {% endfor %}
+                        </p>
+                        <p class="card-text">Year: {{ book.year }} </p>
+                    </div>
+                </div>
+        </div>
+        <div class="card card-cascade wider">
+                <div class="col-xs-6 col-md-4">
+                    <div class="card-body text-center">
+                        <h4 class="card-title">Internal User Reviews</h4>
+                        <p class="card-text">
+                            {% for review in book.reviews %}
+                                Rating: {{ review.rating }}<br>
+                                Review: {{ review.review }}<br>
+                            {% endfor %}
+                        </p>
+                    </div>
+                </div>
+                {%if element != None %}
+                    <div class="col-xs-6 col-md-4">
+                        <div class="card-body text-center">
+                            <h4 class="card-title">Good Reads Reviews</h4>
+                            <p class="card-text">Number of Ratings: {{ element['reviews_count'] }}</p>
+                            <p class="card-text">Review: {{ element['average_rating'] }}</p>
+                        </div>
+                    </div>
+                {% endif %}
+        </div>
+    </div>
+  </body>
+</html>
