@@ -62,7 +62,7 @@ In addition to provided libraries added 'requests' lib
 Initial project implementation used sqlalchemy orm. After that it was<br>
 refactored to use raw sql<br>
 
-For proper execution DATABASE_URL environment variable must be set to<br>
+For proper execution DATABASE_URL environment variable must be set to <br>
 postgres://sojelnptnsncxh:6d44b0816915c80507f801b9b514d0ca1928e959438b9d128f862c4d022b0bb9@ec2-107-22-175-33.compute-1.amazonaws.com:5432/d38636j4dsvs33<br>
 
 In order to prep the DB 'python import.py' must be executed first
